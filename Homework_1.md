@@ -32,9 +32,12 @@ The arrow points to the path from the original data to the final display.
 Transaction data binlog is stored in mysql, including order data, user registration data or user purchase information. With Alibaba Canal open source components, real-time monitoring of data changes and captures are passed to kafka.
 Kafka is a large message queue buffer. It is a cluster mode message buffer. It can store a large amount of buffered data. If our transaction volume is large, we will use kafka as a message buffer to form some original transaction data.
 After buffering, it will enter the real-time computing framework spark streaming. Spark streaming will process these order data in Kafka. Starting from spark streaming, there are two different monitoring methods.
-Green arrow method:
+
+
+Method 1:
 Spark streaming processes the data into the metric we want, does some aggregation and index processing, and the metric is returned to kafka.
 After processing the indicators, a service of nodejs will be started. This service will process the kafka of the metric again, and then push the data to the browser through socket.io. Then you will see that the entire data is extracted from the database. A series of transmissions are pushed to the browser in real time, and the real-time processing path is clear. As long as a transaction occurs in mysql, the entire data stream will finally reach the browser through such a pipeline.
 
-Red arrow method:
+
+Method 2:
 After spark streaming has processed the basic data, it will be passed to HBASE. According to whether there are new indicators in Hbase, there are new indicators that show changes in transmission in the past, and the browser refreshes from time to time.
