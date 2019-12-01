@@ -7,6 +7,7 @@ Fintech2018
 
 
 1.	System introduction
+
 "E-commerce real-time transaction monitoring system" is mainly used to help e-commerce platforms to monitor customers' purchase movements and order situation, and then use the results of data analysis to improve platform merchant efficiency. For example, merchants can design marketing activities based on real-time transaction conditions, or adjust inventory based on sales over time. On some major e-commerce event dates, such as "Double 11" and "Double 12", this kind of data platform is more useful. This system has high requirements for data timeliness.
 The general data processing process of "E-commerce real-time is as follows: 
 (a)	real-time capture of changes in transaction data in the database;
@@ -16,12 +17,14 @@ The general data processing process of "E-commerce real-time is as follows:
 
 
 2.	Key factors in the system
+
 (a)	Comprehensive monitoring indicators;
 (b)	Abnormal alarm;
 (c)	Visual chart analysis
 
 
 3.	Work flow
+
 There are four main steps in this workflow:
 Indicators collection -> Indicators processing -> Indicators storage -> Indicators visualization
 
@@ -35,9 +38,11 @@ After buffering, it will enter the real-time computing framework spark streaming
 
 
 Method 1:
+
 Spark streaming processes the data into the metric we want, does some aggregation and index processing, and the metric is returned to kafka.
 After processing the indicators, a service of nodejs will be started. This service will process the kafka of the metric again, and then push the data to the browser through socket.io. Then you will see that the entire data is extracted from the database. A series of transmissions are pushed to the browser in real time, and the real-time processing path is clear. As long as a transaction occurs in mysql, the entire data stream will finally reach the browser through such a pipeline.
 
 
 Method 2:
+
 After spark streaming has processed the basic data, it will be passed to HBASE. According to whether there are new indicators in Hbase, there are new indicators that show changes in transmission in the past, and the browser refreshes from time to time.
