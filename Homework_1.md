@@ -25,7 +25,7 @@ The general data processing process of "E-commerce real-time is as follows:
 There are four main steps in this workflow:
 Indicators collection -> Indicators processing -> Indicators storage -> Indicators visualization
 
-![alt 属性文本](/user/desktop/bd.png)
+![workfolw](/user/desktop/bd.png)
 
 
 The arrow points to the path from the original data to the final display.
